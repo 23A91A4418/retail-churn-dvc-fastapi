@@ -1,0 +1,51 @@
+base:
+  random_state: 42
+  log_level: "INFO"
+
+data_ingestion:
+  dataset_url: "https://archive.ics.uci.edu/static/public/352/online+retail.zip"
+  raw_data_dir: "data/raw"
+  raw_data_path: "data/raw/online_retail.csv"
+
+data_validation:
+  report_path: "results/validation_report.json"
+  required_columns:
+    - "InvoiceNo"
+    - "StockCode"
+    - "Description"
+    - "Quantity"
+    - "InvoiceDate"
+    - "UnitPrice"
+    - "CustomerID"
+    - "Country"
+
+feature_engineering:
+  cutoff_days_before_end: 90
+  min_spending: 0.0
+  test_size: 0.25
+  processed_data_dir: "data/processed"
+  train_path: "data/processed/train.csv"
+  test_path: "data/processed/test.csv"
+  features_info_path: "data/processed/features_info.json"
+
+train:
+  model_dir: "models"
+  model_path: "models/model.joblib"
+  preprocessor_path: "models/preprocessor.joblib"
+  mlflow_tracking_uri: "mlruns"
+  experiment_name: "retail_churn_prediction"
+  algorithm: "xgboost"
+  xgboost_params:
+    n_estimators: 150
+    max_depth: 4
+    learning_rate: 0.05
+    subsample: 0.8
+    colsample_bytree: 0.8
+    scale_pos_weight: 1.2
+    random_state: 42
+    eval_metric: "logloss"
+
+evaluate:
+  metrics_path: "results/metrics.json"
+  plots_dir: "results/plots"
+  classification_threshold: 0.5

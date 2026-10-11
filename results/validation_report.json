@@ -1,0 +1,28 @@
+{
+  "dataset_path": "data/raw/online_retail.csv",
+  "total_rows": 541909,
+  "total_columns": 8,
+  "columns": [
+    "InvoiceNo",
+    "StockCode",
+    "Description",
+    "Quantity",
+    "InvoiceDate",
+    "UnitPrice",
+    "CustomerID",
+    "Country"
+  ],
+  "missing_customer_ids": 135080,
+  "valid_customer_rows": 406829,
+  "unique_customers": 4372,
+  "unique_countries": 38,
+  "unique_products": 4070,
+  "date_range": {
+    "start": "2010-12-01 08:26:00",
+    "end": "2011-12-09 12:50:00"
+  },
+  "cancellation_count": 9288,
+  "negative_quantities": 10624,
+  "zero_or_negative_unit_price": 2517,
+  "validation_passed": true
+}

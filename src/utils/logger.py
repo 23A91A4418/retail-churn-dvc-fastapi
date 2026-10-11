@@ -1,0 +1,18 @@
+import logging
+import sys
+
+def get_logger(name: str = "retail_churn", level: str = "INFO") -> logging.Logger:
+    """Creates and configures a standard logger."""
+    logger = logging.getLogger(name)
+    if not logger.handlers:
+        logger.setLevel(getattr(logging, level.upper(), logging.INFO))
+        handler = logging.StreamHandler(sys.stdout)
+        handler.setLevel(getattr(logging, level.upper(), logging.INFO))
+        formatter = logging.Formatter(
+            "[%(asctime)s] [%(levelname)s] [%(name)s]: %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S"
+        )
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+        logger.propagate = False
+    return logger

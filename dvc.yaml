@@ -1,0 +1,73 @@
+stages:
+  ingest_data:
+    cmd: python src/stages/ingest_data.py --config params.yaml
+    deps:
+      - src/stages/ingest_data.py
+      - params.yaml
+    outs:
+      - data/raw/online_retail.csv
+
+  validate_data:
+    cmd: python src/stages/validate_data.py --config params.yaml
+    deps:
+      - src/stages/validate_data.py
+      - data/raw/online_retail.csv
+      - params.yaml
+    outs:
+      - results/validation_report.json:
+          cache: false
+
+  feature_engineering:
+    cmd: python src/stages/feature_engineering.py --config params.yaml
+    deps:
+      - src/stages/feature_engineering.py
+      - data/raw/online_retail.csv
+      - params.yaml
+    params:
+      - feature_engineering.cutoff_days_before_end
+      - feature_engineering.test_size
+      - base.random_state
+    outs:
+      - data/processed/train.csv
+      - data/processed/test.csv
+      - data/processed/features_info.json:
+          cache: false
+
+  train:
+    cmd: python src/stages/train.py --config params.yaml
+    deps:
+      - src/stages/train.py
+      - data/processed/train.csv
+      - params.yaml
+    params:
+      - train.xgboost_params.n_estimators
+      - train.xgboost_params.max_depth
+      - train.xgboost_params.learning_rate
+      - train.xgboost_params.subsample
+      - train.xgboost_params.colsample_bytree
+      - train.xgboost_params.scale_pos_weight
+      - train.xgboost_params.random_state
+    outs:
+      - models/model.joblib
+      - models/preprocessor.joblib
+
+  evaluate:
+    cmd: python src/stages/evaluate.py --config params.yaml
+    deps:
+      - src/stages/evaluate.py
+      - models/model.joblib
+      - models/preprocessor.joblib
+      - data/processed/test.csv
+      - params.yaml
+    params:
+      - evaluate.classification_threshold
+    metrics:
+      - results/metrics.json:
+          cache: false
+    plots:
+      - results/plots/confusion_matrix.png:
+          cache: false
+      - results/plots/roc_curve.png:
+          cache: false
+      - results/plots/feature_importance.png:
+          cache: false

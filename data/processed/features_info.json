@@ -1,0 +1,76 @@
+{
+  "cutoff_date": "2011-09-10 12:50:00",
+  "cutoff_days_before_end": 90,
+  "total_customers": 3412,
+  "churn_rate": 0.4338,
+  "train_samples": 2559,
+  "test_samples": 853,
+  "feature_columns": [
+    "recency_days",
+    "frequency",
+    "monetary_total",
+    "avg_order_value",
+    "total_items_purchased",
+    "unique_products",
+    "cancellation_rate",
+    "tenure_days",
+    "is_uk"
+  ],
+  "target_column": "churn",
+  "feature_summary": {
+    "recency_days": {
+      "mean": 96.58,
+      "std": 81.16,
+      "min": 0.87,
+      "max": 283.12
+    },
+    "frequency": {
+      "mean": 3.49,
+      "std": 5.77,
+      "min": 0.0,
+      "max": 132.0
+    },
+    "monetary_total": {
+      "mean": 1598.89,
+      "std": 6116.01,
+      "min": 0.0,
+      "max": 178302.62
+    },
+    "avg_order_value": {
+      "mean": 393.54,
+      "std": 1414.52,
+      "min": 0.0,
+      "max": 77183.6
+    },
+    "total_items_purchased": {
+      "mean": 940.94,
+      "std": 3814.16,
+      "min": 0.0,
+      "max": 128320.0
+    },
+    "unique_products": {
+      "mean": 49.32,
+      "std": 67.36,
+      "min": 0.0,
+      "max": 1230.0
+    },
+    "cancellation_rate": {
+      "mean": 0.12,
+      "std": 0.2,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "tenure_days": {
+      "mean": 185.03,
+      "std": 80.77,
+      "min": 0.92,
+      "max": 283.18
+    },
+    "is_uk": {
+      "mean": 0.9,
+      "std": 0.3,
+      "min": 0.0,
+      "max": 1.0
+    }
+  }
+}
