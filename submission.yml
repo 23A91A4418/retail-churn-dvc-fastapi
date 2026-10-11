@@ -1,0 +1,5 @@
+# Automated Evaluation Configuration for Retail Churn DVC & FastAPI Pipeline
+setup: pip install -r requirements.txt
+dvc-pull: dvc pull
+repro: dvc repro
+run-service: uvicorn src.api.main:app --host 0.0.0.0 --port 8000
